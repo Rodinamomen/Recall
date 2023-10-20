@@ -10,6 +10,7 @@ data class NoteEntity(
     var subTitle : String="",
     var dateTime: String="",
     var noteText:String="",
+    var noteColor:String="#28282B",
  //   var imgPath:String,
 //    var webLink: String
 ) {

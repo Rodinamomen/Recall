@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".note.model.NoteFragment">
+    tools:context=".note.view.NoteFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -105,10 +105,10 @@
             app:layout_constraintTop_toBottomOf="@+id/et_title">
 
             <View
-                android:id="@+id/view"
+                android:id="@+id/v_note"
                 android:layout_width="5dp"
                 android:layout_height="match_parent"
-                android:background="@color/purple" />
+                android:background="@color/BlackNote" />
 
             <EditText
                 android:id="@+id/et_subtitle"
@@ -147,5 +147,125 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/matteBlack"
+            app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="2dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_gallery" />
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="2dp"
+                app:layout_constraintStart_toEndOf="@+id/imageView5"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_link" />
+
+            <ImageView
+                android:id="@+id/imageView8"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="2dp"
+                app:layout_constraintStart_toEndOf="@+id/imageView6"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_locatioin" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@color/matteBlack"
+            android:backgroundTint="@color/matteBlack"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_color_7"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="2dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/note_color_7" />
+
+            <ImageView
+                android:id="@+id/iv_color_6"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="2dp"
+                app:layout_constraintStart_toEndOf="@+id/iv_color_3"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/note_color_6" />
+
+            <ImageView
+                android:id="@+id/iv_color_5"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="2dp"
+                app:layout_constraintStart_toEndOf="@+id/iv_color_4"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/note_color_5" />
+
+            <ImageView
+                android:id="@+id/iv_color_4"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="2dp"
+                app:layout_constraintStart_toEndOf="@+id/iv_color_2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/note_color_4" />
+
+            <ImageView
+                android:id="@+id/iv_color_3"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="2dp"
+                app:layout_constraintStart_toEndOf="@+id/iv_color_5"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/note_color_3" />
+
+            <ImageView
+                android:id="@+id/iv_color_2"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="2dp"
+                app:layout_constraintStart_toEndOf="@+id/iv_color_1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/note_color_2" />
+
+            <ImageView
+                android:id="@+id/iv_color_1"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="2dp"
+                app:layout_constraintStart_toEndOf="@+id/iv_color_7"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/note_color_1" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
