@@ -11,6 +11,7 @@
         android:layout_height="match_parent"
         android:background="@color/matteBlack"
         android:backgroundTint="@color/matteBlack">
+
         <ImageView
             android:id="@+id/imageView7"
             android:layout_width="45dp"

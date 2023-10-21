@@ -6,7 +6,8 @@
     <color name="matteBlack">#28282B</color>
     <color name="lightGray">#c9c9c9</color>
     <color name="purple">#800080</color>
-
+    <color name="red">#FF0000</color>
+    <color name="DarkGreen">#30BE71</color>
     <color name="DefaultNote">#606570</color>
     <color name="BlueNote">#4e33ff</color>
     <color name="YellowNote">#ffd633</color>

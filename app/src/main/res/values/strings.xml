@@ -8,4 +8,7 @@
     <string name="type_something">Type something...</string>
     <string name="hint_subtitle">Subtitle</string>
     <string name="date">Date</string>
+    <string name="discard_dialog">Are your sure you want discard your changes ?</string>
+    <string name="keep">Keep</string>
+    <string name="discard">Discard</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.example.noteapp.note.view
 
+import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
@@ -11,6 +12,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.noteapp.R
@@ -41,6 +43,7 @@ class NoteFragment : Fragment() {
     lateinit var color7Iv:ImageView
     lateinit var colorV: View
 
+
     lateinit var colorSelected : String
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -65,6 +68,7 @@ class NoteFragment : Fragment() {
         color7Iv=view.findViewById(R.id.iv_color_7)
         colorV=view.findViewById(R.id.v_note)
         dateTv=view.findViewById(R.id.tv_date)
+
         colorSelected="#28282B"
         color1Iv.setOnClickListener {
             colorSelected="#ffffff"
@@ -99,7 +103,12 @@ class NoteFragment : Fragment() {
         var currentDate = sdf.format(Date())
         dateTv.text= currentDate
         backPresIv.setOnClickListener {
-            findNavController().navigate(R.id.action_noteFragment_to_homeFragment)
+          val dialog=  layoutInflater.inflate(R.layout.discard_dialog,null)
+           val myDialog = Dialog(requireContext())
+            myDialog.setContentView(dialog)
+            myDialog.setCancelable(true)
+            myDialog.show()
+         //   findNavController().navigate(R.id.action_noteFragment_to_homeFragment)
         }
         saveNoteIv.setOnClickListener {
             checkNotEmpty(noteTitleEt.text.toString(),noteSubtitleEt.text.toString(),dateTv.text.toString(),noteTextEt.text.toString(),colorSelected)
@@ -125,7 +134,6 @@ class NoteFragment : Fragment() {
             findNavController().navigate(R.id.action_noteFragment_to_homeFragment)
         }
     }
-
     private fun gettingViewModelReady(context: Context){
         var noteViewModelFactory = NoteViewModelFactory(NoteRepoImp(LocalDatabaseRepoImp(context)))
         noteViewModel = ViewModelProvider(this,noteViewModelFactory).get(NoteViewModel::class.java)
