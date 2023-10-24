@@ -198,15 +198,15 @@
                            android:id="@+id/constraintLayout2"
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
-                           android:layout_marginStart="20dp"
                            android:layout_marginTop="40dp"
+                           app:layout_constraintEnd_toEndOf="parent"
                            app:layout_constraintStart_toStartOf="parent"
                            app:layout_constraintTop_toTopOf="parent">
 
                            <ImageView
                                android:id="@+id/iv_color_7"
-                               android:layout_width="30dp"
-                               android:layout_height="30dp"
+                               android:layout_width="35dp"
+                               android:layout_height="35dp"
                                android:layout_marginStart="5dp"
                                android:layout_marginTop="2dp"
                                app:layout_constraintStart_toStartOf="parent"
@@ -215,8 +215,8 @@
 
                            <ImageView
                                android:id="@+id/iv_color_6"
-                               android:layout_width="30dp"
-                               android:layout_height="30dp"
+                               android:layout_width="35dp"
+                               android:layout_height="35dp"
                                android:layout_marginStart="8dp"
                                android:layout_marginTop="2dp"
                                app:layout_constraintStart_toEndOf="@+id/iv_color_3"
@@ -225,8 +225,8 @@
 
                            <ImageView
                                android:id="@+id/iv_color_5"
-                               android:layout_width="30dp"
-                               android:layout_height="30dp"
+                               android:layout_width="35dp"
+                               android:layout_height="35dp"
                                android:layout_marginStart="8dp"
                                android:layout_marginTop="2dp"
                                app:layout_constraintStart_toEndOf="@+id/iv_color_4"
@@ -235,8 +235,8 @@
 
                            <ImageView
                                android:id="@+id/iv_color_4"
-                               android:layout_width="30dp"
-                               android:layout_height="30dp"
+                               android:layout_width="35dp"
+                               android:layout_height="35dp"
                                android:layout_marginStart="8dp"
                                android:layout_marginTop="2dp"
                                app:layout_constraintStart_toEndOf="@+id/iv_color_2"
@@ -245,8 +245,8 @@
 
                            <ImageView
                                android:id="@+id/iv_color_3"
-                               android:layout_width="30dp"
-                               android:layout_height="30dp"
+                               android:layout_width="35dp"
+                               android:layout_height="35dp"
                                android:layout_marginStart="8dp"
                                android:layout_marginTop="2dp"
                                app:layout_constraintStart_toEndOf="@+id/iv_color_5"
@@ -255,23 +255,14 @@
 
                            <ImageView
                                android:id="@+id/iv_color_2"
-                               android:layout_width="30dp"
-                               android:layout_height="30dp"
-                               android:layout_marginStart="8dp"
-                               android:layout_marginTop="2dp"
-                               app:layout_constraintStart_toEndOf="@+id/iv_color_1"
-                               app:layout_constraintTop_toTopOf="parent"
-                               app:srcCompat="@drawable/note_color_2" />
-
-                           <ImageView
-                               android:id="@+id/iv_color_1"
-                               android:layout_width="30dp"
-                               android:layout_height="30dp"
-                               android:layout_marginStart="8dp"
+                               android:layout_width="35dp"
+                               android:layout_height="35dp"
+                               android:layout_marginStart="6dp"
                                android:layout_marginTop="2dp"
                                app:layout_constraintStart_toEndOf="@+id/iv_color_7"
                                app:layout_constraintTop_toTopOf="parent"
-                               app:srcCompat="@drawable/note_color_1" />
+                               app:srcCompat="@drawable/note_color_2" />
+
                        </androidx.constraintlayout.widget.ConstraintLayout>
 
                        <ImageView

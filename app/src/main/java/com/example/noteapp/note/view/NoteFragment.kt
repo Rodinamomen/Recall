@@ -39,7 +39,6 @@ class NoteFragment : Fragment() {
     lateinit var noteViewModel: NoteViewModel
     lateinit var noteSubtitleEt: EditText
     lateinit var dateTv:TextView
-   lateinit var color1Iv:ImageView
     lateinit var color2Iv:ImageView
     lateinit var color3Iv:ImageView
     lateinit var color4Iv:ImageView
@@ -63,7 +62,6 @@ class NoteFragment : Fragment() {
         noteTextEt= view.findViewById(R.id.et_note_text)
         noteSubtitleEt= view.findViewById(R.id.et_subtitle)
         saveNoteIv=view.findViewById(R.id.iv_save_note)
-        color1Iv=view.findViewById(R.id.iv_color_1)
         color2Iv=view.findViewById(R.id.iv_color_2)
         color3Iv=view.findViewById(R.id.iv_color_3)
         color4Iv=view.findViewById(R.id.iv_color_4)
@@ -79,10 +77,6 @@ class NoteFragment : Fragment() {
         }
 
         colorSelected="#28282B"
-        color1Iv.setOnClickListener {
-            colorSelected="#ffffff"
-            colorV.setBackgroundColor(Color.parseColor(colorSelected))
-        }
         color2Iv.setOnClickListener {
             colorSelected="#4e33ff"
             colorV.setBackgroundColor(Color.parseColor(colorSelected))
