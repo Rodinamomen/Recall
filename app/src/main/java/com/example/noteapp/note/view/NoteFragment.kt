@@ -3,16 +3,20 @@ package com.example.noteapp.note.view
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.noteapp.R
@@ -21,6 +25,7 @@ import com.example.noteapp.dataBase.localDatabase.LocalDatabaseRepoImp
 import com.example.noteapp.note.repo.NoteRepoImp
 import com.example.noteapp.note.viewmodel.NoteViewModel
 import com.example.noteapp.note.viewmodel.NoteViewModelFactory
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -34,7 +39,7 @@ class NoteFragment : Fragment() {
     lateinit var noteViewModel: NoteViewModel
     lateinit var noteSubtitleEt: EditText
     lateinit var dateTv:TextView
-    lateinit var color1Iv:ImageView
+   lateinit var color1Iv:ImageView
     lateinit var color2Iv:ImageView
     lateinit var color3Iv:ImageView
     lateinit var color4Iv:ImageView
@@ -42,14 +47,13 @@ class NoteFragment : Fragment() {
     lateinit var color6Iv:ImageView
     lateinit var color7Iv:ImageView
     lateinit var colorV: View
-
-
     lateinit var colorSelected : String
+    private lateinit var sheet : FrameLayout
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         return inflater.inflate(R.layout.fragment_note, container, false)
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -68,6 +72,11 @@ class NoteFragment : Fragment() {
         color7Iv=view.findViewById(R.id.iv_color_7)
         colorV=view.findViewById(R.id.v_note)
         dateTv=view.findViewById(R.id.tv_date)
+        sheet = view.findViewById(R.id.bottom_sheet)
+        BottomSheetBehavior.from(sheet).apply {
+            peekHeight=100
+            this.state= BottomSheetBehavior.STATE_COLLAPSED
+        }
 
         colorSelected="#28282B"
         color1Iv.setOnClickListener {
@@ -107,8 +116,19 @@ class NoteFragment : Fragment() {
            val myDialog = Dialog(requireContext())
             myDialog.setContentView(dialog)
             myDialog.setCancelable(true)
+            myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             myDialog.show()
-         //   findNavController().navigate(R.id.action_noteFragment_to_homeFragment)
+            val keepBtn = dialog.findViewById<Button>(R.id.btn_keep)
+            val discardBtn = dialog.findViewById<Button>(R.id.btn_discard)
+            keepBtn.setOnClickListener {
+                checkNotEmpty(noteTitleEt.text.toString(),noteSubtitleEt.text.toString(),dateTv.text.toString(),noteTextEt.text.toString(),colorSelected)
+                myDialog.dismiss()
+            }
+
+            discardBtn.setOnClickListener {
+                myDialog.dismiss()
+                findNavController().navigate(R.id.action_noteFragment_to_homeFragment)
+            }
         }
         saveNoteIv.setOnClickListener {
             checkNotEmpty(noteTitleEt.text.toString(),noteSubtitleEt.text.toString(),dateTv.text.toString(),noteTextEt.text.toString(),colorSelected)
