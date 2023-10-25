@@ -1,11 +1,16 @@
 package com.example.noteapp.note.view
-
 import android.Manifest
+import android.app.Activity.RESULT_OK
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,8 +21,6 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.cardview.widget.CardView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.noteapp.R
@@ -28,8 +31,10 @@ import com.example.noteapp.note.viewmodel.NoteViewModel
 import com.example.noteapp.note.viewmodel.NoteViewModelFactory
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.progressindicator.BaseProgressIndicator.HideAnimationBehavior
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
+import java.lang.Exception
 import java.security.Permission
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -51,10 +56,14 @@ class NoteFragment : Fragment(), EasyPermissions.PermissionCallbacks,EasyPermiss
     lateinit var color7Iv:ImageView
     lateinit var colorV: View
     lateinit var colorSelected : String
+    lateinit var imageSelected:String
     private lateinit var sheet : FrameLayout
-    lateinit var addImageIv: TextView
-     private var READ_STORAGE_PERM= 123
-     private var WRITE_STORAGE_PERM= 123
+    lateinit var imageFromGalleryIv: ImageView
+    lateinit var addImageTv: TextView
+     private val READ_STORAGE_PERM= 123
+     private val RQUEST_CODE_IMAGE= 456
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -64,7 +73,6 @@ class NoteFragment : Fragment(), EasyPermissions.PermissionCallbacks,EasyPermiss
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         backPresIv=view.findViewById(R.id.iv_back_press)
         noteTitleEt=view.findViewById(R.id.et_title)
         noteTextEt= view.findViewById(R.id.et_note_text)
@@ -79,13 +87,15 @@ class NoteFragment : Fragment(), EasyPermissions.PermissionCallbacks,EasyPermiss
         colorV=view.findViewById(R.id.v_note)
         dateTv=view.findViewById(R.id.tv_date)
         sheet = view.findViewById(R.id.bottom_sheet)
-        addImageIv=view.findViewById(R.id.tv_add_image)
+        addImageTv=view.findViewById(R.id.tv_add_image)
+        imageFromGalleryIv=view.findViewById(R.id.iv_image_picker)
         BottomSheetBehavior.from(sheet).apply {
             peekHeight=100
             this.state= BottomSheetBehavior.STATE_COLLAPSED
         }
 
         colorSelected="#28282B"
+        imageSelected=" "
         color2Iv.setOnClickListener {
             colorSelected="#4e33ff"
             colorV.setBackgroundColor(Color.parseColor(colorSelected))
@@ -127,7 +137,6 @@ class NoteFragment : Fragment(), EasyPermissions.PermissionCallbacks,EasyPermiss
                 checkNotEmpty(noteTitleEt.text.toString(),noteSubtitleEt.text.toString(),dateTv.text.toString(),noteTextEt.text.toString(),colorSelected)
                 myDialog.dismiss()
             }
-
             discardBtn.setOnClickListener {
                 myDialog.dismiss()
                 findNavController().navigate(R.id.action_noteFragment_to_homeFragment)
@@ -136,11 +145,12 @@ class NoteFragment : Fragment(), EasyPermissions.PermissionCallbacks,EasyPermiss
         saveNoteIv.setOnClickListener {
             checkNotEmpty(noteTitleEt.text.toString(),noteSubtitleEt.text.toString(),dateTv.text.toString(),noteTextEt.text.toString(),colorSelected)
         }
-       addImageIv.setOnClickListener {
+       addImageTv.setOnClickListener {
             readStorageTask()
         }
-
     }
+
+
     private fun checkNotEmpty(noteTitle:String, noteSubtitle:String,noteDate:String, noteText:String,colorSelected:String ) {
         if(noteTitle==""){
             MaterialAlertDialogBuilder(requireContext()).setTitle("Title is required").setPositiveButton("Ok", null)
@@ -156,10 +166,12 @@ class NoteFragment : Fragment(), EasyPermissions.PermissionCallbacks,EasyPermiss
                 .show()
         }
         else {
-            noteViewModel.insertNote(NoteEntity(0,noteTitle, noteSubtitle,noteDate,noteText, colorSelected))
+            noteViewModel.insertNote(NoteEntity(0,noteTitle, noteSubtitle,noteDate,noteText, colorSelected,imageSelected))
             findNavController().navigate(R.id.action_noteFragment_to_homeFragment)
         }
     }
+
+
     private fun gettingViewModelReady(context: Context){
         var noteViewModelFactory = NoteViewModelFactory(NoteRepoImp(LocalDatabaseRepoImp(context)))
         noteViewModel = ViewModelProvider(this,noteViewModelFactory).get(NoteViewModel::class.java)
@@ -167,12 +179,10 @@ class NoteFragment : Fragment(), EasyPermissions.PermissionCallbacks,EasyPermiss
     private fun hasReadStoragePerm(): Boolean{
         return EasyPermissions.hasPermissions(requireContext(),Manifest.permission.READ_EXTERNAL_STORAGE)
     }
-    private fun hasWriteStoragePerm(): Boolean{
-        return EasyPermissions.hasPermissions(requireContext(),Manifest.permission.WRITE_EXTERNAL_STORAGE)
-    }
+
     private fun readStorageTask(){
         if(hasReadStoragePerm()){
-                Toast.makeText(requireContext(),"DONE",Toast.LENGTH_LONG).show()
+                pickImageFromGallery()
         }else{
             EasyPermissions.requestPermissions(
                 requireActivity(),
@@ -182,6 +192,7 @@ class NoteFragment : Fragment(), EasyPermissions.PermissionCallbacks,EasyPermiss
             )
         }
     }
+
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -205,5 +216,35 @@ class NoteFragment : Fragment(), EasyPermissions.PermissionCallbacks,EasyPermiss
 
     override fun onRationaleDenied(requestCode: Int) {
 
+    }
+    fun pickImageFromGallery(){
+        var intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+        if(intent.resolveActivity(requireActivity().packageManager)!=null){
+            startActivityForResult(intent, RQUEST_CODE_IMAGE)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if(requestCode==RQUEST_CODE_IMAGE && resultCode== RESULT_OK){
+            if(data!=null){
+
+                var selectedImageUrl= data.data
+
+                if(selectedImageUrl!=null){
+                    try {
+                        var inputStream =requireActivity().contentResolver.openInputStream(selectedImageUrl)
+                        var bitmap= BitmapFactory.decodeStream(inputStream)
+                        imageSelected= bitmap.toString()
+                        imageFromGalleryIv.setImageBitmap(bitmap)
+                        imageFromGalleryIv.visibility=View.VISIBLE
+
+                    }catch (e :Exception){
+                        Toast.makeText(requireContext(), e.message, Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
     }
 }

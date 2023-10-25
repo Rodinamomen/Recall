@@ -1,5 +1,6 @@
 package com.example.noteapp.Home.adapter
 
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
@@ -28,7 +29,6 @@ class NotesAdapter(val data : List<NoteEntity>): RecyclerView.Adapter<NotesAdapt
     override fun onBindViewHolder(holder: MyHolder, position: Int) {
         holder.noteTitle.text = data[position].title
         holder.noteDesc.text= data[position].noteText
-        Log.d("color", "onBindViewHolder: ${data[position].noteColor} ")
        holder.noteColor.setCardBackgroundColor(Color.parseColor(data[position].noteColor))
         holder.noteDate.text=data[position].dateTime
 
