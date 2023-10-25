@@ -1,5 +1,6 @@
 package com.example.noteapp.note.view
 
+import android.Manifest
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
@@ -27,11 +28,14 @@ import com.example.noteapp.note.viewmodel.NoteViewModel
 import com.example.noteapp.note.viewmodel.NoteViewModelFactory
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import pub.devrel.easypermissions.AppSettingsDialog
+import pub.devrel.easypermissions.EasyPermissions
+import java.security.Permission
 import java.text.SimpleDateFormat
 import java.util.Date
 
 
-class NoteFragment : Fragment() {
+class NoteFragment : Fragment(), EasyPermissions.PermissionCallbacks,EasyPermissions.RationaleCallbacks {
     lateinit var backPresIv: ImageView
     lateinit var noteTitleEt: EditText
     lateinit var noteTextEt: EditText
@@ -48,6 +52,9 @@ class NoteFragment : Fragment() {
     lateinit var colorV: View
     lateinit var colorSelected : String
     private lateinit var sheet : FrameLayout
+    lateinit var addImageIv: TextView
+     private var READ_STORAGE_PERM= 123
+     private var WRITE_STORAGE_PERM= 123
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,6 +64,7 @@ class NoteFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         backPresIv=view.findViewById(R.id.iv_back_press)
         noteTitleEt=view.findViewById(R.id.et_title)
         noteTextEt= view.findViewById(R.id.et_note_text)
@@ -71,6 +79,7 @@ class NoteFragment : Fragment() {
         colorV=view.findViewById(R.id.v_note)
         dateTv=view.findViewById(R.id.tv_date)
         sheet = view.findViewById(R.id.bottom_sheet)
+        addImageIv=view.findViewById(R.id.tv_add_image)
         BottomSheetBehavior.from(sheet).apply {
             peekHeight=100
             this.state= BottomSheetBehavior.STATE_COLLAPSED
@@ -127,6 +136,10 @@ class NoteFragment : Fragment() {
         saveNoteIv.setOnClickListener {
             checkNotEmpty(noteTitleEt.text.toString(),noteSubtitleEt.text.toString(),dateTv.text.toString(),noteTextEt.text.toString(),colorSelected)
         }
+       addImageIv.setOnClickListener {
+            readStorageTask()
+        }
+
     }
     private fun checkNotEmpty(noteTitle:String, noteSubtitle:String,noteDate:String, noteText:String,colorSelected:String ) {
         if(noteTitle==""){
@@ -144,12 +157,53 @@ class NoteFragment : Fragment() {
         }
         else {
             noteViewModel.insertNote(NoteEntity(0,noteTitle, noteSubtitle,noteDate,noteText, colorSelected))
-            Toast.makeText(requireContext(), "DONE", Toast.LENGTH_SHORT).show()
             findNavController().navigate(R.id.action_noteFragment_to_homeFragment)
         }
     }
     private fun gettingViewModelReady(context: Context){
         var noteViewModelFactory = NoteViewModelFactory(NoteRepoImp(LocalDatabaseRepoImp(context)))
         noteViewModel = ViewModelProvider(this,noteViewModelFactory).get(NoteViewModel::class.java)
+    }
+    private fun hasReadStoragePerm(): Boolean{
+        return EasyPermissions.hasPermissions(requireContext(),Manifest.permission.READ_EXTERNAL_STORAGE)
+    }
+    private fun hasWriteStoragePerm(): Boolean{
+        return EasyPermissions.hasPermissions(requireContext(),Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    }
+    private fun readStorageTask(){
+        if(hasReadStoragePerm()){
+                Toast.makeText(requireContext(),"DONE",Toast.LENGTH_LONG).show()
+        }else{
+            EasyPermissions.requestPermissions(
+                requireActivity(),
+                getString(R.string.request_sotrage_permission),
+                READ_STORAGE_PERM,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            )
+        }
+    }
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        EasyPermissions.onRequestPermissionsResult(requestCode,permissions,grantResults,requireActivity())
+    }
+    override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
+
+    }
+    override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
+        if(EasyPermissions.somePermissionPermanentlyDenied(requireActivity(),perms)){
+            AppSettingsDialog.Builder(requireActivity()).build().show()
+        }
+    }
+
+    override fun onRationaleAccepted(requestCode: Int) {
+
+    }
+
+    override fun onRationaleDenied(requestCode: Int) {
+
     }
 }
