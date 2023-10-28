@@ -11,9 +11,8 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_homeFragment_to_noteFragment"
-            app:destination="@id/noteFragment"
-            app:enterAnim="@anim/from_right" />
+            android:id="@+id/action_homeFragment_to_noteFragment8"
+            app:destination="@id/noteFragment" />
     </fragment>
     <fragment
         android:id="@+id/noteFragment"
@@ -25,5 +24,33 @@
             app:destination="@id/homeFragment"
             app:enterAnim="@anim/from_left"
             app:popUpTo="@id/homeFragment" />
+        <argument
+            android:name="title"
+            app:argType="string"
+            android:defaultValue="" />
+        <argument
+            android:name="subTitle"
+            app:argType="string"
+            android:defaultValue="" />
+        <argument
+            android:name="dateTime"
+            app:argType="string"
+            android:defaultValue="" />
+        <argument
+            android:name="noteText"
+            app:argType="string"
+            android:defaultValue="" />
+        <argument
+            android:name="noteColor"
+            app:argType="string"
+            android:defaultValue='"#28282B"' />
+        <argument
+            android:name="imgPath"
+            app:argType="string"
+            android:defaultValue="" />
+        <argument
+            android:name="webLink"
+            app:argType="string"
+            android:defaultValue="" />
     </fragment>
 </navigation>
