@@ -12,7 +12,7 @@ data class NoteEntity(
     var noteText:String="",
     var noteColor:String="#28282B",
     var imgPath:String="",
-//    var webLink: String
+    var webLink: String=""
 ) {
     override fun toString(): String {
         return super.toString()

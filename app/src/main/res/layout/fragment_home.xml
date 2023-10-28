@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Home.view.HomeFragment">
 
 
@@ -20,10 +20,10 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/shape_search_bar"
+            android:iconifiedByDefault="false"
+            android:inputType="text"
             android:queryHint="@string/search_your_notes"
             android:searchIcon="@drawable/ic_search_icon"
-            android:inputType="text"
-            android:iconifiedByDefault="false"
             android:theme="@style/ThemeOverlay.search"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"

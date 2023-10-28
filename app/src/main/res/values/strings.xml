@@ -12,4 +12,6 @@
     <string name="discard_dialog">Are your sure you want discard your changes ?</string>
     <string name="keep">Keep</string>
     <string name="discard">Discard</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
 </resources>

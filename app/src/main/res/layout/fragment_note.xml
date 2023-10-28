@@ -74,18 +74,39 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iv_back_press" />
+
+        <TextView
+            android:id="@+id/tv_note_link"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@android:color/transparent"
+            android:ellipsize="end"
+            android:fontFamily="@font/nunito"
+            android:inputType="textMultiLine|textLongMessage"
+            android:paddingLeft="10dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/lightGray"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_image_picker" />
+
         <EditText
             android:id="@+id/et_note_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="60dp"
             android:layout_marginEnd="16dp"
             android:backgroundTint="@android:color/transparent"
+            android:ellipsize="end"
             android:fontFamily="@font/nunito"
             android:hint="@string/type_something"
             android:inputType="textMultiLine|textLongMessage"
-            android:ellipsize="end"
             android:paddingLeft="10dp"
             android:textColor="@color/lightGray"
             android:textColorHint="@color/lightGray"
@@ -164,207 +185,212 @@
             app:layout_constraintRight_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_date" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_anchor="@+id/constraintLayout3"
-
-        app:layout_anchorGravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <FrameLayout
-            android:id="@+id/bottom_sheet"
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
-            android:visibility="visible"
-            android:layout_height="350dp"
-            android:background="@drawable/bottom_sheet"
-            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
-            <ImageView
-                android:layout_width="180dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center|top"
-                android:scaleType="fitXY"
-                android:src="@drawable/ic_min"></ImageView>
+            android:layout_height="match_parent"
+            app:layout_anchor="@+id/constraintLayout3"
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout"
+            app:layout_anchorGravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
+
+            <FrameLayout
+                android:id="@+id/bottom_sheet"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="350dp"
+                android:background="@drawable/bottom_sheet"
+                android:visibility="visible"
+                app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
-                <TextView
-                    android:id="@+id/textView6"
-                    android:layout_width="wrap_content"
+                <ImageView
+                    android:layout_width="180dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="45dp"
-                    android:layout_marginEnd="16dp"
-                    android:fontFamily="@font/nunito"
-                    android:text="Pick color"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/constraintLayout2"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="25dp"
-                    android:fontFamily="@font/nunito"
-                    android:text="Delete note"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/imageView3"
-                    app:layout_constraintTop_toBottomOf="@+id/textView3" />
+                    android:layout_gravity="center|top"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_min"></ImageView>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraintLayout2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginTop="40dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    android:id="@+id/constraintLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                    <ImageView
-                        android:id="@+id/iv_color_7"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="2dp"
+                    <TextView
+                        android:id="@+id/textView6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="45dp"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="@font/nunito"
+                        android:text="Pick color"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/constraintLayout2"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textView5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="25dp"
+                        android:fontFamily="@font/nunito"
+                        android:text="Delete note"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/imageView3"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_add_link" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/constraintLayout2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginTop="40dp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/note_color_7" />
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:id="@+id/iv_color_7"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="2dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/note_color_7" />
+
+                        <ImageView
+                            android:id="@+id/iv_color_6"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="2dp"
+                            app:layout_constraintStart_toEndOf="@+id/iv_color_3"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/note_color_6" />
+
+                        <ImageView
+                            android:id="@+id/iv_color_5"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="2dp"
+                            app:layout_constraintStart_toEndOf="@+id/iv_color_4"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/note_color_5" />
+
+                        <ImageView
+                            android:id="@+id/iv_color_4"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="2dp"
+                            app:layout_constraintStart_toEndOf="@+id/iv_color_2"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/note_color_4" />
+
+                        <ImageView
+                            android:id="@+id/iv_color_3"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="2dp"
+                            app:layout_constraintStart_toEndOf="@+id/iv_color_5"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/note_color_3" />
+
+                        <ImageView
+                            android:id="@+id/iv_color_2"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_marginStart="6dp"
+                            android:layout_marginTop="2dp"
+                            app:layout_constraintStart_toEndOf="@+id/iv_color_7"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/note_color_2" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <ImageView
-                        android:id="@+id/iv_color_6"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="2dp"
-                        app:layout_constraintStart_toEndOf="@+id/iv_color_3"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/note_color_6" />
+                        android:id="@+id/imageView5"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="30dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
+                        app:srcCompat="@drawable/ic_gallery" />
 
                     <ImageView
-                        android:id="@+id/iv_color_5"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="2dp"
-                        app:layout_constraintStart_toEndOf="@+id/iv_color_4"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/note_color_5" />
+                        android:id="@+id/imageView6"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="20dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView5"
+                        app:srcCompat="@drawable/ic_link" />
 
                     <ImageView
-                        android:id="@+id/iv_color_4"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="2dp"
-                        app:layout_constraintStart_toEndOf="@+id/iv_color_2"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/note_color_4" />
+                        android:id="@+id/imageView3"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="15dp"
+                        android:src="@drawable/ic_trash"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
 
-                    <ImageView
-                        android:id="@+id/iv_color_3"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="2dp"
-                        app:layout_constraintStart_toEndOf="@+id/iv_color_5"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/note_color_3" />
+                    <TextView
+                        android:id="@+id/tv_add_link"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="25dp"
+                        android:fontFamily="@font/nunito"
+                        android:text="Add link"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/imageView6"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_add_image" />
 
-                    <ImageView
-                        android:id="@+id/iv_color_2"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:layout_marginStart="6dp"
-                        android:layout_marginTop="2dp"
-                        app:layout_constraintStart_toEndOf="@+id/iv_color_7"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/note_color_2" />
+                    <TextView
+                        android:id="@+id/tv_add_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="30dp"
+                        android:fontFamily="@font/nunito"
+                        android:text="Add image"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/imageView5"
+                        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+
+                    <View
+                        android:id="@+id/view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="15dp"
+                        android:background="@color/lightGray"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
+            </FrameLayout>
 
-                <ImageView
-                    android:id="@+id/imageView5"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="30dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
-                    app:srcCompat="@drawable/ic_gallery" />
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-                <ImageView
-                    android:id="@+id/imageView6"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="20dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView5"
-                    app:srcCompat="@drawable/ic_link" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <ImageView
-                    android:id="@+id/imageView3"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="15dp"
-                    android:src="@drawable/ic_trash"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView6" />
-
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="25dp"
-                    android:fontFamily="@font/nunito"
-                    android:text="Add link"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/imageView6"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_add_image" />
-
-                <TextView
-                    android:id="@+id/tv_add_image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="30dp"
-                    android:fontFamily="@font/nunito"
-                    android:text="Add image"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/imageView5"
-                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
-
-                <View
-                    android:id="@+id/view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="2dp"
-                    android:layout_marginTop="15dp"
-                    android:background="@color/lightGray"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </FrameLayout>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </FrameLayout>
