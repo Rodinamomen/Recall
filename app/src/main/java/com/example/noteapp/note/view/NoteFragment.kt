@@ -204,6 +204,7 @@ class NoteFragment : Fragment(), EasyPermissions.PermissionCallbacks,
         noteTitle: String,
         noteSubtitle: String,
         noteDate: String,
+
         noteText: String,
         colorSelected: String
     ) {
