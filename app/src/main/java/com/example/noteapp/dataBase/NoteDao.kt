@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 
 @Dao
 interface NoteDao {
@@ -14,4 +15,6 @@ interface NoteDao {
     suspend fun deleteNote(note: NoteEntity)
     @Query("SELECT * FROM NoteEntity ORDER BY id DESC")
     suspend fun getAllNotes() :List<NoteEntity>
+    @Update
+    fun updateNote(note : NoteEntity)
 }

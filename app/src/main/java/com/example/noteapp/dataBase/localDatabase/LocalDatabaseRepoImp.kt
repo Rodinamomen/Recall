@@ -21,4 +21,8 @@ class LocalDatabaseRepoImp(context: Context): LocalDatabaseRepo {
     override suspend fun getAllNotes(): List<NoteEntity> {
        return noteDao.getAllNotes()
     }
+
+    override fun updateNote(note: NoteEntity) {
+        noteDao.updateNote(note)
+    }
 }

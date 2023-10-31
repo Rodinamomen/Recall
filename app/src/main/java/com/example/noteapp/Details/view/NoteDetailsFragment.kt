@@ -1,12 +1,10 @@
-package com.example.noteapp.note.view
+package com.example.noteapp.Details.view
 
 import android.Manifest
-import android.annotation.SuppressLint
-import android.app.Activity.RESULT_OK
+import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -28,6 +26,9 @@ import androidx.core.net.toUri
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.noteapp.Details.repo.NoteDetailsRepoImp
+import com.example.noteapp.Details.viewmodel.NoteDetailsViewModel
+import com.example.noteapp.Details.viewmodel.NoteDetailsViewModelFactory
 import com.example.noteapp.R
 import com.example.noteapp.dataBase.NoteEntity
 import com.example.noteapp.dataBase.localDatabase.LocalDatabaseRepoImp
@@ -36,24 +37,22 @@ import com.example.noteapp.note.viewmodel.NoteViewModel
 import com.example.noteapp.note.viewmodel.NoteViewModelFactory
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.progressindicator.BaseProgressIndicator.HideAnimationBehavior
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
 import java.io.File
 import java.lang.Exception
-import java.security.Permission
 import java.text.SimpleDateFormat
 import java.util.Date
-import kotlin.math.log
 
 
-class NoteFragment : Fragment(), EasyPermissions.PermissionCallbacks,
-    EasyPermissions.RationaleCallbacks {
+class NoteDetailsFragment : Fragment() , EasyPermissions.PermissionCallbacks,
+EasyPermissions.RationaleCallbacks{
+    val navArgs : NoteDetailsFragmentArgs by navArgs()
     lateinit var backPresIv: ImageView
     lateinit var noteTitleEt: EditText
     lateinit var noteTextEt: EditText
     lateinit var saveNoteIv: ImageView
-    lateinit var noteViewModel: NoteViewModel
+    lateinit var noteDetailsViewModel: NoteDetailsViewModel
     lateinit var noteSubtitleEt: EditText
     lateinit var dateTv: TextView
     lateinit var color2Iv: ImageView
@@ -65,6 +64,7 @@ class NoteFragment : Fragment(), EasyPermissions.PermissionCallbacks,
     lateinit var colorV: View
     lateinit var colorSelected: String
     lateinit var imageSelected: String
+    var noteId :Int=-1
     lateinit var linkEnterd:String
     private lateinit var sheet: FrameLayout
     lateinit var imageFromGalleryIv: ImageView
@@ -73,22 +73,22 @@ class NoteFragment : Fragment(), EasyPermissions.PermissionCallbacks,
     lateinit var noteLinkTv: TextView
     private val READ_STORAGE_PERM = 123
     private val RQUEST_CODE_IMAGE = 456
-
-
-    override fun onCreateView(
+  override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_note, container, false)
+        return inflater.inflate(R.layout.fragment_note_details, container, false)
     }
 
-    @SuppressLint("MissingInflatedId")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         backPresIv = view.findViewById(R.id.iv_back_press)
         noteTitleEt = view.findViewById(R.id.et_title)
+         noteTitleEt.setText(navArgs.title)
         noteTextEt = view.findViewById(R.id.et_note_text)
+        noteTextEt.setText(navArgs.noteText)
         noteSubtitleEt = view.findViewById(R.id.et_subtitle)
+        noteSubtitleEt.setText(navArgs.subTitle)
         saveNoteIv = view.findViewById(R.id.iv_save_note)
         color2Iv = view.findViewById(R.id.iv_color_2)
         color3Iv = view.findViewById(R.id.iv_color_3)
@@ -97,20 +97,28 @@ class NoteFragment : Fragment(), EasyPermissions.PermissionCallbacks,
         color6Iv = view.findViewById(R.id.iv_color_6)
         color7Iv = view.findViewById(R.id.iv_color_7)
         colorV = view.findViewById(R.id.v_note)
+        colorV.setBackgroundColor(Color.parseColor(navArgs.noteColor))
         dateTv = view.findViewById(R.id.tv_date)
         addLinkTv= view.findViewById(R.id.tv_add_link)
         noteLinkTv=view.findViewById(R.id.tv_note_link)
+         noteLinkTv.setText(navArgs.webLink)
         sheet = view.findViewById(R.id.bottom_sheet)
         addImageTv = view.findViewById(R.id.tv_add_image)
         imageFromGalleryIv = view.findViewById(R.id.iv_image_picker)
+        if(navArgs.imgPath.isEmpty()){
+            imageFromGalleryIv.visibility=View.GONE
+
+        }else{
+            imageFromGalleryIv.setImageURI(navArgs.imgPath.toUri())
+            imageFromGalleryIv.visibility=View.VISIBLE
+        }
         BottomSheetBehavior.from(sheet).apply {
             peekHeight = 100
             this.state = BottomSheetBehavior.STATE_COLLAPSED
         }
-        linkEnterd=""
-        colorSelected = "#28282B"
-        imageSelected = ""
-
+        linkEnterd=navArgs.webLink
+        imageSelected = navArgs.imgPath
+        colorSelected=navArgs.noteColor
         color2Iv.setOnClickListener {
             colorSelected = "#4e33ff"
             colorV.setBackgroundColor(Color.parseColor(colorSelected))
@@ -160,7 +168,7 @@ class NoteFragment : Fragment(), EasyPermissions.PermissionCallbacks,
             }
             discardBtn.setOnClickListener {
                 myDialog.dismiss()
-                findNavController().navigate(R.id.action_noteFragment_to_homeFragment)
+                findNavController().navigate(R.id.action_noteDetailsFragment_to_homeFragment)
             }
         }
         saveNoteIv.setOnClickListener {
@@ -186,7 +194,7 @@ class NoteFragment : Fragment(), EasyPermissions.PermissionCallbacks,
             val cancelBtn= dialog.findViewById<Button>(R.id.btn_cancel)
             val addlinkEt= dialog.findViewById<EditText>(R.id.et_add_link)
             savebtn.setOnClickListener {
-              noteLinkTv.text=  addlinkEt.text
+                noteLinkTv.text=  addlinkEt.text
                 linkEnterd= addlinkEt.text.toString()
                 addlinkEt.text.clear()
                 myDialog.dismiss()
@@ -219,9 +227,9 @@ class NoteFragment : Fragment(), EasyPermissions.PermissionCallbacks,
                 .setPositiveButton("Ok", null)
                 .show()
         } else {
-                noteViewModel.insertNote(
+            noteDetailsViewModel.updateNote(
                     NoteEntity(
-                        0,
+                        navArgs.noteId,
                         noteTitle,
                         noteSubtitle,
                         noteDate,
@@ -231,13 +239,13 @@ class NoteFragment : Fragment(), EasyPermissions.PermissionCallbacks,
                         linkEnterd
                     )
                 )
-                findNavController().navigate(R.id.action_noteFragment_to_homeFragment)
+                findNavController().navigate(R.id.action_noteDetailsFragment_to_homeFragment)
         }
     }
 
     private fun gettingViewModelReady(context: Context) {
-        var noteViewModelFactory = NoteViewModelFactory(NoteRepoImp(LocalDatabaseRepoImp(context)))
-        noteViewModel = ViewModelProvider(this, noteViewModelFactory).get(NoteViewModel::class.java)
+        var noteDetailsViewModelFactory = NoteDetailsViewModelFactory(NoteDetailsRepoImp(LocalDatabaseRepoImp(context)))
+        noteDetailsViewModel = ViewModelProvider(this, noteDetailsViewModelFactory).get(NoteDetailsViewModel::class.java)
     }
 
     private fun hasReadStoragePerm(): Boolean {
@@ -302,7 +310,7 @@ class NoteFragment : Fragment(), EasyPermissions.PermissionCallbacks,
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == RQUEST_CODE_IMAGE && resultCode == RESULT_OK) {
+        if (requestCode == RQUEST_CODE_IMAGE && resultCode == Activity.RESULT_OK) {
             if (data != null) {
                 var selectedImageUrl = data.data
                 if (selectedImageUrl != null) {
@@ -317,4 +325,4 @@ class NoteFragment : Fragment(), EasyPermissions.PermissionCallbacks,
             }
         }
     }
-}
+    }

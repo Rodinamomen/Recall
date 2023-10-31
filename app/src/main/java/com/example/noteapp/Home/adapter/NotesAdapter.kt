@@ -15,6 +15,7 @@ import com.example.noteapp.dataBase.NoteEntity
 class NotesAdapter(val data : List<NoteEntity>):
 
     RecyclerView.Adapter<NotesAdapter.MyHolder> (){
+
     var dataList : ArrayList<NoteEntity> = data as ArrayList<NoteEntity>
     private lateinit var onItemClickListener: OnItemClickListener
 
