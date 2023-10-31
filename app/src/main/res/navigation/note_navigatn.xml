@@ -11,8 +11,11 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_homeFragment_to_noteFragment8"
+            android:id="@+id/action_homeFragment_to_noteFragment"
             app:destination="@id/noteFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_noteDetailsFragment"
+            app:destination="@id/noteDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/noteFragment"
@@ -24,33 +27,47 @@
             app:destination="@id/homeFragment"
             app:enterAnim="@anim/from_left"
             app:popUpTo="@id/homeFragment" />
-        <argument
-            android:name="title"
-            app:argType="string"
-            android:defaultValue="" />
-        <argument
-            android:name="subTitle"
-            app:argType="string"
-            android:defaultValue="" />
-        <argument
-            android:name="dateTime"
-            app:argType="string"
-            android:defaultValue="" />
-        <argument
-            android:name="noteText"
-            app:argType="string"
-            android:defaultValue="" />
-        <argument
-            android:name="noteColor"
-            app:argType="string"
-            android:defaultValue='"#28282B"' />
-        <argument
-            android:name="imgPath"
-            app:argType="string"
-            android:defaultValue="" />
-        <argument
-            android:name="webLink"
-            app:argType="string"
-            android:defaultValue="" />
+    </fragment>
+    <fragment
+        android:id="@+id/noteDetailsFragment"
+        android:name="com.example.noteapp.Details.view.NoteDetailsFragment"
+        android:label="fragment_note_details"
+        tools:layout="@layout/fragment_note_details">
+
+    <argument
+        android:name="title"
+        app:argType="string"
+        android:defaultValue="" />
+    <argument
+        android:name="subTitle"
+        app:argType="string"
+        android:defaultValue="" />
+    <argument
+        android:name="dateTime"
+        app:argType="string"
+        android:defaultValue="" />
+    <argument
+        android:name="noteText"
+        app:argType="string"
+        android:defaultValue="" />
+    <argument
+        android:name="noteColor"
+        app:argType="string"
+        android:defaultValue='"#28282B"' />
+    <argument
+        android:name="imgPath"
+        app:argType="string"
+        android:defaultValue="" />
+    <argument
+        android:name="webLink"
+        app:argType="string"
+        android:defaultValue="" />
+    <argument
+        android:name="noteId "
+        app:argType="integer" />
+        <action
+            android:id="@+id/action_noteDetailsFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+
     </fragment>
 </navigation>

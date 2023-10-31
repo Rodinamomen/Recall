@@ -14,4 +14,8 @@ class NoteRepoImp(var localDatabaseRepoImp: LocalDatabaseRepo): NoteRepo {
     override suspend fun getAllNotes(): List<NoteEntity> {
        return localDatabaseRepoImp.getAllNotes()
     }
+
+    override fun updateNote(note: NoteEntity) {
+        localDatabaseRepoImp.updateNote(note)
+    }
 }

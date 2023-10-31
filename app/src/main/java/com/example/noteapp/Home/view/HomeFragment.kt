@@ -19,9 +19,7 @@ import com.example.noteapp.Home.viewModel.HomeViewModelFactory
 import com.example.noteapp.R
 import com.example.noteapp.dataBase.NoteEntity
 import com.example.noteapp.dataBase.localDatabase.LocalDatabaseRepoImp
-import com.example.noteapp.note.repo.NoteRepoImp
-import com.example.noteapp.note.viewmodel.NoteViewModel
-import com.example.noteapp.note.viewmodel.NoteViewModelFactory
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import androidx.navigation.fragment.navArgs
 
@@ -51,16 +49,14 @@ class HomeFragment : Fragment() {
                 notesRecyclerView.adapter = myAdapter
                 myAdapter.setOnClickListener(object : NotesAdapter.OnItemClickListener{
                     override fun onItemClicked(notesModel: NoteEntity) {
-                      val action= HomeFragmentDirections.actionHomeFragmentToNoteFragment8(notesModel.title,notesModel.subTitle,notesModel.dateTime,notesModel.noteText,notesModel.noteColor,notesModel.imgPath,notesModel.webLink)
-                      //  val action=  HomeFragmentDirections.actionHomeFragmentToNoteFragment(notesModel.title,notesModel.subTitle,notesModel.dateTime,notesModel.noteText,notesModel.noteColor,notesModel.imgPath,notesModel.webLink)
-                        findNavController().navigate(action)
+                    val action =     HomeFragmentDirections.actionHomeFragmentToNoteDetailsFragment(notesModel.id,notesModel.title,notesModel.subTitle,notesModel.dateTime,notesModel.noteText,notesModel.noteColor,notesModel.imgPath,notesModel.webLink)
+                     findNavController().navigate(action)
                     }
                 })
                 notesRecyclerView.layoutManager =
                     LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
             }
             }
-
         addNoteBtn.setOnClickListener {
             findNavController().navigate(R.id.noteFragment)
         }
