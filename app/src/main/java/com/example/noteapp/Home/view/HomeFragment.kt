@@ -74,7 +74,7 @@ class HomeFragment : Fragment() {
 
            override fun onQueryTextChange(newText: String?): Boolean {
                if(newText.toString()!=""){
-                   homeViewModel.searchByTitle(newText.toString())
+                   homeViewModel.searchByTitle("%${newText.toString()}%")
                    homeViewModel.searchNotes.observe(requireActivity()) { data ->
                        var myAdapter = NotesAdapter(data)
                        notesRecyclerView.adapter = myAdapter
