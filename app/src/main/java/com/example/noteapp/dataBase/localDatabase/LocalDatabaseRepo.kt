@@ -9,4 +9,5 @@ interface LocalDatabaseRepo {
     suspend fun getAllNotes() :List<NoteEntity>
 
     fun updateNote(note : NoteEntity)
+   suspend fun searchByTitle(title :String ) :List<NoteEntity>
 }

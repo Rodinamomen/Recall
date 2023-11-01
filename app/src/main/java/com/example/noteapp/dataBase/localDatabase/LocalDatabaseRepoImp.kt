@@ -25,4 +25,8 @@ class LocalDatabaseRepoImp(context: Context): LocalDatabaseRepo {
     override fun updateNote(note: NoteEntity) {
         noteDao.updateNote(note)
     }
+
+    override suspend fun searchByTitle(title: String): List<NoteEntity> {
+       return noteDao.searchByTitle(title)
+    }
 }

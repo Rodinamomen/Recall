@@ -17,4 +17,6 @@ interface NoteDao {
     suspend fun getAllNotes() :List<NoteEntity>
     @Update
     fun updateNote(note : NoteEntity)
+    @Query("SELECT * FROM NoteEntity WHERE title LIKE :query")
+    suspend fun searchByTitle(query :String ) :List<NoteEntity>
 }

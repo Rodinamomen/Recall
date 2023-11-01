@@ -7,4 +7,8 @@ class HomeRepoImp(val localDatabaseRepo: LocalDatabaseRepo): HomeRepo {
     override suspend fun getAllNotes(): List<NoteEntity> {
         return localDatabaseRepo.getAllNotes()
     }
+
+    override suspend fun searchByTitle(title: String): List<NoteEntity> {
+        return localDatabaseRepo.searchByTitle(title)
+    }
 }

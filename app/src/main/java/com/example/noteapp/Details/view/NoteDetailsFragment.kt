@@ -64,7 +64,7 @@ EasyPermissions.RationaleCallbacks{
     lateinit var colorV: View
     lateinit var colorSelected: String
     lateinit var imageSelected: String
-    var noteId :Int=-1
+    lateinit var delteNoteTv: TextView
     lateinit var linkEnterd:String
     private lateinit var sheet: FrameLayout
     lateinit var imageFromGalleryIv: ImageView
@@ -101,7 +101,8 @@ EasyPermissions.RationaleCallbacks{
         dateTv = view.findViewById(R.id.tv_date)
         addLinkTv= view.findViewById(R.id.tv_add_link)
         noteLinkTv=view.findViewById(R.id.tv_note_link)
-         noteLinkTv.setText(navArgs.webLink)
+        noteLinkTv.setText(navArgs.webLink)
+        delteNoteTv=view.findViewById(R.id.tv_delete_note)
         sheet = view.findViewById(R.id.bottom_sheet)
         addImageTv = view.findViewById(R.id.tv_add_image)
         imageFromGalleryIv = view.findViewById(R.id.iv_image_picker)
@@ -203,6 +204,10 @@ EasyPermissions.RationaleCallbacks{
                 addlinkEt.text.clear()
                 myDialog.dismiss()
             }
+        }
+        delteNoteTv.setOnClickListener {
+            noteDetailsViewModel.deleteNote(NoteEntity(navArgs.noteId,navArgs.title,navArgs.subTitle,navArgs.dateTime,navArgs.noteText,navArgs.noteColor,navArgs.imgPath,navArgs.webLink))
+            findNavController().navigate(R.id.action_noteDetailsFragment_to_homeFragment)
         }
     }
     private fun checkNotEmpty(

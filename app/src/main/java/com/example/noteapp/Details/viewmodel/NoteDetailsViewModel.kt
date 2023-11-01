@@ -15,6 +15,11 @@ class NoteDetailsViewModel(val noteDetailsRepo: NoteDetailsRepo) : ViewModel(){
             noteDetailsRepo.updateNote(note)
         }
     }
+    fun deleteNote(note: NoteEntity){
+        viewModelScope.launch {
+            noteDetailsRepo.deleteNote(note)
+        }
+    }
     private val _allNotes = MutableLiveData<List<NoteEntity>>()
     val allNotes : LiveData<List<NoteEntity>> = _allNotes
 }
