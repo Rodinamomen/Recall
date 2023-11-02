@@ -11,7 +11,7 @@ Recall is an intuitive Android app designed to help users efficiently store thei
 - Date: Automatically records the date and time the note was created.
 ###  3. **Choose Note Color**
 - Color Palette: Select a color to categorize your note.
-###  4. **Upload Imager**
+###  4. **Upload Image**
 - Add Image: tap the add image text view to upload an image from your device. Attach relevant images to your note for visual reference.
 ###  5. **Add Link**
 - Add Link: Insert URLs or web links directly into your note. Clickable links make it easy to access additional information related to your note.
@@ -21,3 +21,14 @@ Recall is an intuitive Android app designed to help users efficiently store thei
 - Delete Note: Remove a note by clicking the delete button while viewing the note.
 ###  7. **Search for Specific Note**
 - Search Bar: Use the search bar to quickly find a specific note. Type keywords, titles.
+## Technical Details
+
+Recall is built using modern technologies to provide a seamless user experience:
+
+- **Built with Kotlin:** 
+  
+- **MVVM Architecture:** 
+  
+- **Room Database:** 
+  
+- **Kotlin Coroutines:**
