@@ -3,9 +3,10 @@
 Recall is an intuitive Android app designed to help users efficiently store their thoughts, notes, images, and links in one place. With its user-friendly interface and powerful features, Recall provides a seamless solution for organizing and managing information on your Android device. Whether you are a student, professional, or anyone who loves to jot down ideas, Recall is here to assist you.
 ## Features
 ###  1. **Create note**: 
--Tap the "+" button to create a new 
+-Tap the "+" button to create a new note.
+
 ![msg1255033130-72512](https://github.com/Rodinamomen/Recall/assets/96385247/9595418b-85e9-4ae9-8fc7-d02422031180)
-note.
+
 ###  2. **Note Details**
 - Note Title: Provide a concise title for your note.
 - Note Subtitle: Add a subtitle to give your note context.
