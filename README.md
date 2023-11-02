@@ -12,6 +12,10 @@ Recall is an intuitive Android app designed to help users efficiently store thei
 - Note Subtitle: Add a subtitle to give your note context.
 - Note Text: Write down your thoughts, ideas, or any information you want to store.
 - Date: Automatically records the date and time the note was created.
+  
+- ![msg1255033130-72513](https://github.com/Rodinamomen/Recall/assets/96385247/c0333686-f687-4f5c-bf63-e056bedb8f07)
+  
+
 ###  3. **Choose Note Color**
 - Color Palette: Select a color to categorize your note.
 ###  4. **Upload Image**
