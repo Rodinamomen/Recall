@@ -18,16 +18,36 @@ Recall is an intuitive Android app designed to help users efficiently store thei
 
 ###  3. **Choose Note Color**
 - Color Palette: Select a color to categorize your note.
+  
+  ![msg1255033130-72514](https://github.com/Rodinamomen/Recall/assets/96385247/a3867b2a-7d95-47aa-b9ce-2fea605347b8)
+
 ###  4. **Upload Image**
 - Add Image: tap the add image text view to upload an image from your device. Attach relevant images to your note for visual reference.
+  
+  ![msg1255033130-72515](https://github.com/Rodinamomen/Recall/assets/96385247/20838beb-0cc5-43ae-93f3-7bb6025cadbb)
+
 ###  5. **Add Link**
 - Add Link: Insert URLs or web links directly into your note. Clickable links make it easy to access additional information related to your note.
+
+  ![msg1255033130-72516](https://github.com/Rodinamomen/Recall/assets/96385247/1821b6cb-46d6-4978-8f72-4c6524e11f93)
+
 ###  6. **View and Edit Note**
 - View Note: Tap on any note to view its details, including title, subtitle, text, date, attached images, and links.
 - Edit Note: While viewing a note, tap the edit button to modify the note's content, title, subtitle, color, images, or links.
 - Delete Note: Remove a note by clicking the delete button while viewing the note.
+  
+![msg1255033130-72517](https://github.com/Rodinamomen/Recall/assets/96385247/aae43d3b-7a14-4fd5-8be4-5e148b352d8e)
+
+![msg1255033130-72518](https://github.com/Rodinamomen/Recall/assets/96385247/8ac48aab-3fc2-4fa0-8a81-995c7f37a363)
+
 ###  7. **Search for Specific Note**
 - Search Bar: Use the search bar to quickly find a specific note. Type keywords, titles.
+  
+![msg1255033130-72519](https://github.com/Rodinamomen/Recall/assets/96385247/8cffbaf4-f95f-45d5-bd7e-2d1ffb4ece9d)
+
+![msg1255033130-72520](https://github.com/Rodinamomen/Recall/assets/96385247/df78ae88-1dee-4c14-9cea-ee54f6b81365)
+
+
 ## Technical Details
 
 Recall is built using modern technologies to provide a seamless user experience:
