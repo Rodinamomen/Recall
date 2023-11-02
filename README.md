@@ -25,10 +25,10 @@ Recall is an intuitive Android app designed to help users efficiently store thei
 
 Recall is built using modern technologies to provide a seamless user experience:
 
-- **Built with Kotlin:** 
+- **Built with Kotlin** 
   
-- **MVVM Architecture:** 
+- **MVVM Architecture** 
   
-- **Room Database:** 
+- **Room Database** 
   
-- **Kotlin Coroutines:**
+- **Kotlin Coroutines**
