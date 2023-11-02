@@ -9,17 +9,19 @@ import com.example.noteapp.dataBase.NoteEntity
 import com.example.noteapp.note.repo.NoteRepo
 import kotlinx.coroutines.launch
 
-class NoteDetailsViewModel(val noteDetailsRepo: NoteDetailsRepo) : ViewModel(){
-    fun updateNote(note: NoteEntity){
+class NoteDetailsViewModel(val noteDetailsRepo: NoteDetailsRepo) : ViewModel() {
+    fun updateNote(note: NoteEntity) {
         viewModelScope.launch {
             noteDetailsRepo.updateNote(note)
         }
     }
-    fun deleteNote(note: NoteEntity){
+
+    fun deleteNote(note: NoteEntity) {
         viewModelScope.launch {
             noteDetailsRepo.deleteNote(note)
         }
     }
+
     private val _allNotes = MutableLiveData<List<NoteEntity>>()
-    val allNotes : LiveData<List<NoteEntity>> = _allNotes
+    val allNotes: LiveData<List<NoteEntity>> = _allNotes
 }

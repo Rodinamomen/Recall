@@ -45,35 +45,35 @@ import java.text.SimpleDateFormat
 import java.util.Date
 
 
-class NoteDetailsFragment : Fragment() , EasyPermissions.PermissionCallbacks,
-EasyPermissions.RationaleCallbacks{
-    val navArgs : NoteDetailsFragmentArgs by navArgs()
-    lateinit var backPresIv: ImageView
-    lateinit var noteTitleEt: EditText
-    lateinit var noteTextEt: EditText
-    lateinit var saveNoteIv: ImageView
-    lateinit var noteDetailsViewModel: NoteDetailsViewModel
-    lateinit var noteSubtitleEt: EditText
-    lateinit var dateTv: TextView
-    lateinit var color2Iv: ImageView
-    lateinit var color3Iv: ImageView
-    lateinit var color4Iv: ImageView
-    lateinit var color5Iv: ImageView
-    lateinit var color6Iv: ImageView
-    lateinit var color7Iv: ImageView
-    lateinit var colorV: View
-    lateinit var colorSelected: String
-    lateinit var imageSelected: String
-    lateinit var delteNoteTv: TextView
-    lateinit var linkEnterd:String
+class NoteDetailsFragment : Fragment(), EasyPermissions.PermissionCallbacks,
+    EasyPermissions.RationaleCallbacks {
+    val navArgs: NoteDetailsFragmentArgs by navArgs()
+    private lateinit var backPresIv: ImageView
+    private lateinit var noteTitleEt: EditText
+    private lateinit var noteTextEt: EditText
+    private lateinit var saveNoteIv: ImageView
+    private lateinit var noteDetailsViewModel: NoteDetailsViewModel
+    private lateinit var noteSubtitleEt: EditText
+    private lateinit var dateTv: TextView
+    private lateinit var color2Iv: ImageView
+    private lateinit var color3Iv: ImageView
+    private lateinit var color4Iv: ImageView
+    private lateinit var color5Iv: ImageView
+    private lateinit var color6Iv: ImageView
+    private lateinit var color7Iv: ImageView
+    private lateinit var colorV: View
+    private lateinit var colorSelected: String
+    private lateinit var imageSelected: String
+    private lateinit var delteNoteTv: TextView
+    private lateinit var linkEnterd: String
     private lateinit var sheet: FrameLayout
-    lateinit var imageFromGalleryIv: ImageView
-    lateinit var addImageTv: TextView
-    lateinit var addLinkTv:TextView
-    lateinit var noteLinkTv: TextView
+    private lateinit var imageFromGalleryIv: ImageView
+    private lateinit var addImageTv: TextView
+    private lateinit var addLinkTv: TextView
+    private lateinit var noteLinkTv: TextView
     private val READ_STORAGE_PERM = 123
     private val RQUEST_CODE_IMAGE = 456
-  override fun onCreateView(
+    override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
@@ -84,7 +84,7 @@ EasyPermissions.RationaleCallbacks{
         super.onViewCreated(view, savedInstanceState)
         backPresIv = view.findViewById(R.id.iv_back_press)
         noteTitleEt = view.findViewById(R.id.et_title)
-         noteTitleEt.setText(navArgs.title)
+        noteTitleEt.setText(navArgs.title)
         noteTextEt = view.findViewById(R.id.et_note_text)
         noteTextEt.setText(navArgs.noteText)
         noteSubtitleEt = view.findViewById(R.id.et_subtitle)
@@ -99,50 +99,52 @@ EasyPermissions.RationaleCallbacks{
         colorV = view.findViewById(R.id.v_note)
         colorV.setBackgroundColor(Color.parseColor(navArgs.noteColor))
         dateTv = view.findViewById(R.id.tv_date)
-        addLinkTv= view.findViewById(R.id.tv_add_link)
-        noteLinkTv=view.findViewById(R.id.tv_note_link)
+        addLinkTv = view.findViewById(R.id.tv_add_link)
+        noteLinkTv = view.findViewById(R.id.tv_note_link)
         noteLinkTv.setText(navArgs.webLink)
-        delteNoteTv=view.findViewById(R.id.tv_delete_note)
+        delteNoteTv = view.findViewById(R.id.tv_delete_note)
         sheet = view.findViewById(R.id.bottom_sheet)
         addImageTv = view.findViewById(R.id.tv_add_image)
         imageFromGalleryIv = view.findViewById(R.id.iv_image_picker)
-        if(navArgs.imgPath.isEmpty()){
-            imageFromGalleryIv.visibility=View.GONE
+        if (navArgs.imgPath.isEmpty()) {
+            imageFromGalleryIv.visibility = View.GONE
 
-        }else{
+        } else {
             imageFromGalleryIv.setImageURI(navArgs.imgPath.toUri())
-            imageFromGalleryIv.visibility=View.VISIBLE
+            imageFromGalleryIv.visibility = View.VISIBLE
         }
         BottomSheetBehavior.from(sheet).apply {
             peekHeight = 100
             this.state = BottomSheetBehavior.STATE_COLLAPSED
         }
-        linkEnterd=navArgs.webLink
+        linkEnterd = navArgs.webLink
         imageSelected = navArgs.imgPath
-        colorSelected=navArgs.noteColor
+        colorSelected = navArgs.noteColor
+
         color2Iv.setOnClickListener {
-            colorSelected = "#4e33ff"
-            colorV.setBackgroundColor(Color.parseColor(colorSelected))
+            colorSelected = "#f49696"
+            setColorViewValue(colorV, colorSelected)
         }
         color3Iv.setOnClickListener {
-            colorSelected = "#ffd633"
-            colorV.setBackgroundColor(Color.parseColor(colorSelected))
+            colorSelected = "#c97c7c"
+            setColorViewValue(colorV, colorSelected)
         }
         color4Iv.setOnClickListener {
-            colorSelected = "#ae3b76"
-            colorV.setBackgroundColor(Color.parseColor(colorSelected))
+            colorSelected = "#C5CBFF"
+            setColorViewValue(colorV, colorSelected)
         }
         color5Iv.setOnClickListener {
-            colorSelected = "#0aebaf"
-            colorV.setBackgroundColor(Color.parseColor(colorSelected))
+            colorSelected = "#96F4F4"
+            setColorViewValue(colorV, colorSelected)
         }
         color6Iv.setOnClickListener {
-            colorSelected = "#ff7746"
-            colorV.setBackgroundColor(Color.parseColor(colorSelected))
+            colorSelected = "#FEC5FF"
+            setColorViewValue(colorV, colorSelected)
         }
         color7Iv.setOnClickListener {
             colorSelected = "#202734"
-            colorV.setBackgroundColor(Color.parseColor(colorSelected))
+            setColorViewValue(colorV, colorSelected)
+
         }
         gettingViewModelReady(requireContext())
         val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
@@ -169,7 +171,7 @@ EasyPermissions.RationaleCallbacks{
             }
             discardBtn.setOnClickListener {
                 myDialog.dismiss()
-                findNavController().navigate(R.id.action_noteDetailsFragment_to_homeFragment)
+                navigateToHomeFragment()
             }
         }
         saveNoteIv.setOnClickListener {
@@ -185,18 +187,18 @@ EasyPermissions.RationaleCallbacks{
             readStorageTask()
         }
         addLinkTv.setOnClickListener {
-            val dialog= layoutInflater.inflate(R.layout.link_dialog,null)
-            val myDialog= Dialog(requireContext())
+            val dialog = layoutInflater.inflate(R.layout.link_dialog, null)
+            val myDialog = Dialog(requireContext())
             myDialog.setContentView(dialog)
             myDialog.setCancelable(true)
             myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             myDialog.show()
-            val savebtn =dialog.findViewById<Button>(R.id.btn_Save)
-            val cancelBtn= dialog.findViewById<Button>(R.id.btn_cancel)
-            val addlinkEt= dialog.findViewById<EditText>(R.id.et_add_link)
+            val savebtn = dialog.findViewById<Button>(R.id.btn_Save)
+            val cancelBtn = dialog.findViewById<Button>(R.id.btn_cancel)
+            val addlinkEt = dialog.findViewById<EditText>(R.id.et_add_link)
             savebtn.setOnClickListener {
-                noteLinkTv.text=  addlinkEt.text
-                linkEnterd= addlinkEt.text.toString()
+                noteLinkTv.text = addlinkEt.text
+                linkEnterd = addlinkEt.text.toString()
                 addlinkEt.text.clear()
                 myDialog.dismiss()
             }
@@ -206,10 +208,22 @@ EasyPermissions.RationaleCallbacks{
             }
         }
         delteNoteTv.setOnClickListener {
-            noteDetailsViewModel.deleteNote(NoteEntity(navArgs.noteId,navArgs.title,navArgs.subTitle,navArgs.dateTime,navArgs.noteText,navArgs.noteColor,navArgs.imgPath,navArgs.webLink))
-            findNavController().navigate(R.id.action_noteDetailsFragment_to_homeFragment)
+            noteDetailsViewModel.deleteNote(
+                NoteEntity(
+                    navArgs.noteId,
+                    navArgs.title,
+                    navArgs.subTitle,
+                    navArgs.dateTime,
+                    navArgs.noteText,
+                    navArgs.noteColor,
+                    navArgs.imgPath,
+                    navArgs.webLink
+                )
+            )
+            navigateToHomeFragment()
         }
     }
+
     private fun checkNotEmpty(
         noteTitle: String,
         noteSubtitle: String,
@@ -217,40 +231,37 @@ EasyPermissions.RationaleCallbacks{
         noteText: String,
         colorSelected: String
     ) {
-        if (noteTitle == "") {
+        if (noteTitle.isEmpty()) {
             MaterialAlertDialogBuilder(requireContext()).setTitle("Title is required")
                 .setPositiveButton("Ok", null)
                 .show()
         }
-        if (noteSubtitle == "") {
-            MaterialAlertDialogBuilder(requireContext()).setTitle("SubTitle is required")
-                .setPositiveButton("Ok", null)
-                .show()
-        }
-        if (noteText == "") {
+        if (noteText.isEmpty()) {
             MaterialAlertDialogBuilder(requireContext()).setTitle("Note Text is required")
                 .setPositiveButton("Ok", null)
                 .show()
         } else {
-            noteDetailsViewModel.updateNote(
-                    NoteEntity(
-                        navArgs.noteId,
-                        noteTitle,
-                        noteSubtitle,
-                        noteDate,
-                        noteText,
-                        colorSelected,
-                        imageSelected,
-                        linkEnterd
-                    )
-                )
-                findNavController().navigate(R.id.action_noteDetailsFragment_to_homeFragment)
+            updateNote(
+                navArgs.noteId,
+                noteTitle,
+                noteSubtitle,
+                noteDate,
+                noteText,
+                colorSelected,
+                imageSelected,
+                linkEnterd
+            )
+            navigateToHomeFragment()
         }
     }
 
     private fun gettingViewModelReady(context: Context) {
-        var noteDetailsViewModelFactory = NoteDetailsViewModelFactory(NoteDetailsRepoImp(LocalDatabaseRepoImp(context)))
-        noteDetailsViewModel = ViewModelProvider(this, noteDetailsViewModelFactory).get(NoteDetailsViewModel::class.java)
+        var noteDetailsViewModelFactory =
+            NoteDetailsViewModelFactory(NoteDetailsRepoImp(LocalDatabaseRepoImp(context)))
+        noteDetailsViewModel = ViewModelProvider(
+            this,
+            noteDetailsViewModelFactory
+        ).get(NoteDetailsViewModel::class.java)
     }
 
     private fun hasReadStoragePerm(): Boolean {
@@ -305,7 +316,7 @@ EasyPermissions.RationaleCallbacks{
 
     }
 
-    fun pickImageFromGallery() {
+    private fun pickImageFromGallery() {
         var intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
         if (intent.resolveActivity(requireActivity().packageManager) != null) {
             startActivityForResult(intent, RQUEST_CODE_IMAGE)
@@ -314,7 +325,6 @@ EasyPermissions.RationaleCallbacks{
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
         if (requestCode == RQUEST_CODE_IMAGE && resultCode == Activity.RESULT_OK) {
             if (data != null) {
                 var selectedImageUrl = data.data
@@ -330,4 +340,33 @@ EasyPermissions.RationaleCallbacks{
             }
         }
     }
+
+    private fun setColorViewValue(view: View, colorSelected: String) {
+        view.setBackgroundColor(Color.parseColor(colorSelected))
     }
+
+    private fun navigateToHomeFragment() {
+        findNavController().navigate(R.id.action_noteDetailsFragment_to_homeFragment)
+    }
+
+    private fun updateNote(
+        noteId: Int, noteTitle: String,
+        noteSubtitle: String,
+        noteDate: String,
+        noteText: String,
+        colorSelected: String, imageSelected: String, webLink: String
+    ) {
+        noteDetailsViewModel.updateNote(
+            NoteEntity(
+                noteId,
+                noteTitle,
+                noteSubtitle,
+                noteDate,
+                noteText,
+                colorSelected,
+                imageSelected,
+                webLink
+            )
+        )
+    }
+}

@@ -5,15 +5,18 @@
     <color name="gray">#407C7C7C</color>
     <color name="matteBlack">#28282B</color>
     <color name="lightGray">#c9c9c9</color>
+
     <color name="purple">#800080</color>
     <color name="red">#FF0000</color>
     <color name="DarkGreen">#30BE71</color>
     <color name="DefaultNote">#606570</color>
-    <color name="BlueNote">#4e33ff</color>
-    <color name="YellowNote">#ffd633</color>
-    <color name="WhiteNote">#ffffff</color>
-    <color name="PurpleNote">#ae3b76</color>
-    <color name="GreenNote">#0aebaf</color>
-    <color name="OrangeNote">#ff7746</color>
+
+    <color name="color1">#C4FFCA</color>
+    <color name="color2">#f49696</color>
+    <color name="color3">#c97c7c</color>
+    <color name="color4">#C5CBFF</color>
+    <color name="color5">#96F4F4</color>
+    <color name="color6">#FEC5FF</color>
     <color name="BlackNote">#202734</color>
+    <color name="noteTextColor">#646464</color>
 </resources>

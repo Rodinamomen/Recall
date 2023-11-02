@@ -12,10 +12,12 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_noteFragment"
-            app:destination="@id/noteFragment" />
+            app:destination="@id/noteFragment"
+            app:enterAnim="@anim/from_right" />
         <action
             android:id="@+id/action_homeFragment_to_noteDetailsFragment"
-            app:destination="@id/noteDetailsFragment" />
+            app:destination="@id/noteDetailsFragment"
+            app:enterAnim="@anim/from_right" />
     </fragment>
     <fragment
         android:id="@+id/noteFragment"
@@ -26,7 +28,7 @@
             android:id="@+id/action_noteFragment_to_homeFragment"
             app:destination="@id/homeFragment"
             app:enterAnim="@anim/from_left"
-            app:popUpTo="@id/homeFragment" />
+            app:popUpTo="@id/noteFragment" />
     </fragment>
     <fragment
         android:id="@+id/noteDetailsFragment"
@@ -67,7 +69,9 @@
         app:argType="integer" />
         <action
             android:id="@+id/action_noteDetailsFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/from_left"
+            app:popUpTo="@id/noteDetailsFragment" />
 
     </fragment>
 </navigation>
